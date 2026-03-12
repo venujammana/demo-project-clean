@@ -6,6 +6,10 @@ import os
 
 app = Flask(__name__)
 
+@app.before_request
+def log_request_info():
+    print(f"Request path: {request.path}, method: {request.method}")
+
 # --- Configuration ---
 # Set the project ID dynamically based on the environment or Fallback to a placeholder
 PROJECT_ID = os.environ.get("GOOGLE_CLOUD_PROJECT", "your-gcp-project-id")
