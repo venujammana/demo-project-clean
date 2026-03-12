@@ -29,5 +29,34 @@ except Exception as e:
 def hello_world():
     return "Hello, world!"
 
+@app.route("/notes", methods=["POST"])
+def create_note():
+    if not db:
+        return jsonify({"error": "Firestore not initialized"}), 500
+
+    try:
+        data = request.get_json()
+        title = data.get("title")
+        content = data.get("content")
+
+        if not title or not content:
+            return jsonify({"error": "Title and content are required"}), 400
+
+        # Add a new document with a generated ID
+        new_note_ref = db.collection(FIRESTORE_COLLECTION).document()
+        new_note_ref.set({
+            "title": title,
+            "content": content,
+            "timestamp": firestore.SERVER_TIMESTAMP
+        })
+
+        return jsonify({
+            "id": new_note_ref.id,
+            "message": "Note created successfully"
+        }), 201
+    except Exception as e:
+        return jsonify({"error": str(e)}), 500
+
+
 
 
