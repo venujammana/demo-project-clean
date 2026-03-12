@@ -14,7 +14,7 @@ paths:
       summary: Get all notes
       operationId: getNotes
       x-google-backend:
-        address: "CLOUD_RUN_SERVICE_URL" # Replace with your Cloud Run service URL
+        address: "https://notes-app-service-clean-ywqespoj5q-uc.a.run.app" # Replace with your Cloud Run service URL
         protocol: h2
       responses:
         200:
@@ -27,7 +27,7 @@ paths:
       summary: Create a new note
       operationId: createNote
       x-google-backend:
-        address: "CLOUD_RUN_SERVICE_URL" # Replace with your Cloud Run service URL
+        address: "https://notes-app-service-clean-ywqespoj5q-uc.a.run.app" # Replace with your Cloud Run service URL
         protocol: h2
       parameters:
         - name: note
