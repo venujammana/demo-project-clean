@@ -66,11 +66,12 @@ definitions:
       title:
         type: string
         description: Title of the note
-      required: true
       content:
         type: string
         description: Content of the note
-        required: true
+    required:
+      - title
+      - content
   NoteResponse:
     type: object
     properties:
