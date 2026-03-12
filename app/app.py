@@ -25,4 +25,9 @@ except Exception as e:
     print("Ensure 'GOOGLE_APPLICATION_CREDENTIALS' is set for local development, or running in GCP environment.")
     db = None # Set db to None if initialization fails
 
+@app.route("/")
+def hello_world():
+    return "Hello, world!"
+
+
 
