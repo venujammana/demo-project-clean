@@ -57,6 +57,24 @@ def create_note():
     except Exception as e:
         return jsonify({"error": str(e)}), 500
 
+@app.route("/notes", methods=["GET"])
+def get_notes():
+    if not db:
+        return jsonify({"error": "Firestore not initialized"}), 500
+
+    try:
+        notes_ref = db.collection(FIRESTORE_COLLECTION)
+        all_notes = []
+        for doc in notes_ref.stream():
+            note = doc.to_dict()
+            note["id"] = doc.id
+            all_notes.append(note)
+
+        return jsonify(all_notes), 200
+    except Exception as e:
+        return jsonify({"error": str(e)}), 500
+
+
 
 
 
